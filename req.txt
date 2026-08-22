@@ -1,0 +1,8 @@
+opencv-python
+numpy
+mediapipe
+pandas
+tensorflow
+scikit-learn
+mido
+python-rtmidi

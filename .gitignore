@@ -1,0 +1,6 @@
+.airstrument_env/
+.idea/
+__pycache__/
+*.pyc
+best_chord_model.keras
+hand_landmarker.task
