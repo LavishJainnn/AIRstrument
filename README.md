@@ -43,7 +43,7 @@ venv\Scripts\activate
 **3. Install dependencies**
 
 ```bash
-pip install opencv-python mediapipe numpy tensorflow scikit-learn pandas mido python-rtmidi
+pip install -r res.txt
 
 ```
 
