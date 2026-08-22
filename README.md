@@ -1,4 +1,3 @@
-```markdown
 # AIRstrument
 
 AIRstrument is a real-time computer vision and machine learning engine that transforms your webcam into a polyphonic digital instrument. By tracking your hand gestures in 3D space, the system classifies specific chord shapes and triggers zero-latency MIDI audio through your operating system's native synthesizer.
