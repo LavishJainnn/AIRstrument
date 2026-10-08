@@ -35,7 +35,7 @@ midi_out = mido.open_output()
 #default is a giant piano
 
 # for continuous piano
-# midi_out.send(mido.Message('program_change', program=48))
+midi_out.send(mido.Message('program_change', program=24))
 
 
 #var

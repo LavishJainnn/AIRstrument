@@ -6,7 +6,7 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import ModelCheckpoint
 
-df = pd.read_csv('chords.csv')
+df = pd.read_csv('chords2.csv')
 
 X = df.iloc[:, 1:].values
 y = df.iloc[:, 0].values
@@ -22,7 +22,7 @@ X_train, X_val, y_train, y_val = train_test_split(X, y_oh, test_size=0.2, random
 
 #model building
 model = tf.keras.Sequential([
-    tf.keras.layers.Input(shape=(84,)),
+    tf.keras.layers.Input(shape=(42,)),
     tf.keras.layers.Dense(128, activation='relu'),
     tf.keras.layers.Dropout(0.3),
     tf.keras.layers.Dense(64, activation='relu'),

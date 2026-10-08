@@ -95,12 +95,23 @@ class HandProcessor:
         return norm_points
 
 
-    #norm features
-    def get_norm_f(self, frame_shape):
+    #left hand norm features
+    def norm_left(self, frame_shape):
         ih, iw, _ = frame_shape
-        left_f = self.norm(ih, iw, 'Left')
-        right_f = self.norm(ih, iw, 'Right')
-        return np.hstack((left_f, right_f))
+        return self.norm(ih, iw, 'Right')
+
+
+    #right hand kinematics
+    def kinematics_right(self):
+        if self.latest_results is not None and self.latest_results.hand_landmarks:
+            for idx, landmarker in enumerate(self.latest_results.hand_landmarks):
+                label = self.latest_results.handedness[idx][0].category_name
+
+                if label == 'Left':
+                    index_tip = landmarker[8]
+                    middle_tip = landmarker[12]
+                    return index_tip.x, index_tip.y, middle_tip.y
+        return None, None, None
 
 
     #convert to rgb from bgr

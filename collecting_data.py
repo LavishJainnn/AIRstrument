@@ -11,13 +11,12 @@ current_chord = ""
 
 
 # collecting data
-file = f'test.csv'
+file = f'chords2.csv'
 if not os.path.exists(file):
     with open(file, mode='w', newline="\n", encoding="utf-8") as f:
         writer = csv.writer(f)
         header = ['Label']
         header += [f"L_{axis}{i}" for i in range(21) for axis in ('x', 'y')]
-        header += [f"R_{axis}{i}" for i in range(21) for axis in ('x', 'y')]
         writer.writerow(header)
 
 
@@ -39,14 +38,14 @@ while True:
     engine.frame_process(frame)
     engine.draw_hand_landmarkers(frame)
 
-    combined_f = engine.get_norm_f(frame.shape)
-    detected_hand = np.any(combined_f != 0)
+    left_f = engine.norm_left(frame.shape)
+    detected_hand = np.any(left_f != 0)
 
     if current_chord != "" and is_rec:
         if detected_hand:
             with open(file, mode='a', newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                raw_data = [current_chord] + combined_f.tolist()
+                raw_data = [current_chord] + left_f.tolist()
                 writer.writerow(raw_data)
 
             frames_rec += 1
@@ -70,14 +69,14 @@ while True:
         if key == ord('s'):
             if is_rec:
                 is_rec = False
+                print(f"Recording stopped\nRecorded frames: {frames_rec} of {current_chord} chord!")
             else:
                 is_rec = True
-            print(f"Recoding stopped\nRecorded frames: {frames_rec} of {current_chord} chord!")
         elif key == ord('q'):
             print(f"Recording terminated and saved successfully !!!")
             break
         elif key == ord('n'):
-            current_chord = "NULL"
+            current_chord = "Ideal"
             is_rec = True
             print(f"Collecting data for {current_chord} chord")
         elif ord('a') <= key <= ord('z'):
@@ -86,7 +85,7 @@ while True:
                 current_chord = chr(key).upper()
                 print(f"Collecting data for {current_chord} chord")
 
-    cv2.imshow("Data collector0", frame)
+    cv2.imshow("Data collector", frame)
 
 
 cap.release()
